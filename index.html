@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="author" content="wadahkode"/>
+  <title>Game Gunting Batu Kertas</title>
+  <link rel="stylesheet" href="./styles.css" type="text/css" media="all" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="brand">GBK</div>
+    <div class="rules">
+      <button type="button" id="_rules">❓</button>
+      <p id="_msg" class="msg hide">Raih kemenangan 2 kali untuk mendapatkan keuntungan, kemenangan akan digandakan sesuai dengan taruhan yang anda pasang.</p>
+    </div>
+  </nav>
+  
+  <main>
+    <div class="sambutan">
+      <h1>Gunting Batu Kertas</h1>
+      <p>Sebuah permainan yang sederhana.</p>
+    </div>
+    
+    <div id="papan">
+      <div id="bot">🖐<span>Computer</span></div>
+      <div id="player">🖐<span>Player</span></div>
+    </div>
+    <audio id="player-sound">
+      <source src="player-clicker.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    
+    <button id="button-play" class="enabled">Play</button>
+    <button id="button-stop">Stop</button>
+    <div id="score"></div>
+  </main>
+  
+  <footer id="footer">
+    <div class="kredit"v>
+      <label>credit : </label>
+      <input type="number" id="credit" value="0" disabled="true"/>
+    </div>
+    <div class="win">
+      <div id="win"></div>
+    </div>
+    <div class="taruhan">
+      <label for="_taruhan">Bet :</label>
+      <select id="_taruhan">
+        <option value="100" selected>100</option>
+        <option value="200">200</option>
+        <option value="300">300</option>
+        <option value="400">400</option>
+        <option value="500">500</option>
+        <option value="600">600</option>
+        <option value="700">700</option>
+        <option value="800">800</option>
+        <option value="900">900</option>
+        <option value="1000">1000</option>
+        <option value="2000">2000</option>
+        <option value="3000">3000</option>
+        <option value="4000">4000</option>
+        <option value="5000">5000</option>
+        <option value="6000">6000</option>
+        <option value="7000">7000</option>
+        <option value="8000">8000</option>
+        <option value="9000">9000</option>
+        <option value="10000">10000</option>
+      </select>
+      <!--button type="button" id="up">+</button>
+      <input type="number" id="_taruhan" max="1000" min="1" value="1" disabled="true"/>
+      <button type="button" id="down"></button-->
+    </div>
+  </footer>
+  <script src="./app.js"></script>
+</body>
+</html>
+<!-- Sertakan sumbernya, terima kasih 🙂 -->
