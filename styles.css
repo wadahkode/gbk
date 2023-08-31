@@ -57,20 +57,30 @@ main {
 #papan {
   height: 50vh;
   display: flex;
-  /*flex-direction: column;*/
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   border: 1px solid #ccc;
   border-radius: 3px;
+  gap: 2rem;
 }
 
 #bot,
 #player {
   font-size: 80pt;
+}
+
+#bot {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+#player {
+  display: none;
+  justify-content: center;
+  align-items: center;
 }
 
 #bot span,
