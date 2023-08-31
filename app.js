@@ -9,12 +9,15 @@ const playerSound = document.getElementById("player-sound")
 const btnPlay = document.getElementById("button-play")
 const btnStop = document.getElementById("button-stop")
 const rules = document.getElementById("_rules")
+const bot = document.getElementById('bot')
+const player = document.getElementById('player')
 let result = false
 let taruhan = _taruhan.value
 let firstCredit = 20000
 let totalWin = 0
 let winner = document.getElementById("win")
 let lastCredit = document.getElementById("credit")
+let timeout = 0
 lastCredit.value = firstCredit
 
 function play(prepend=true) {
@@ -23,18 +26,34 @@ function play(prepend=true) {
   if (!result) return false
   
   const sym = setInterval(() => {
-    if (!result) clearInterval(sym)
+    if (!result) {
+      clearInterval(sym)
+    } else if (timeout >= 10) {
+      clearInterval(sym)
+      btnPlay.click()
+      player.style.display = "flex"
+      bot.style.display = "none"
+    }
+    
+    timeout++
     
     return randSym()
-  }, 600)
+  }, 60)
+}
+
+function restart() {
+  bot.style.display = "flex"
+  player.style.display = "none"
+  
+  timeout = 0
 }
 
 function randSym() {
-  const bot = document.getElementById('bot')
-  const player = document.getElementById('player')
   const randBot = Math.floor(Math.random()*3)
   
-  setTimeout(function(){
+  bot.innerHTML = symGame[randBot]
+  
+  /*setTimeout(function(){
     bot.innerHTML = symGame[0]
     player.innerHTML = symGame[0]
   }, 200)
@@ -45,9 +64,9 @@ function randSym() {
   setTimeout(function(){
     bot.innerHTML = symGame[2]
     player.innerHTML = symGame[2]
-  }, 600)
+  }, 600)*/
   
-  player.onclick = function() {
+  player.onclick = function(e) {
     playerSound.play()
     if (lastCredit.value < 1 || lastCredit.value < -1) {
       alert("Credit not enough, please charge again.")
@@ -58,15 +77,18 @@ function randSym() {
       lastCredit.value = 0
     }
     
-    switch (this.innerHTML) {
-      case "✌":
+    switch (e.target.id) {
+      case "gunting":
         checkWin(0, randBot)
+        restart()
         break;
-      case "✊":
+      case "batu":
         checkWin(1, randBot)
+        restart()
         break;
-      case "🖐":
+      case "kertas":
         checkWin(2, randBot)
+        restart()
         break;
     }
   }
@@ -176,14 +198,7 @@ function checkWin(player, bot) {
 
 /*const btnUp = document.getElementById("up")
 const btnDown = document.getElementById("down")*/
-
-
-btnPlay.onclick = () => {
-  if (lastCredit.value < 1 || lastCredit.value < -1) {
-    alert("Credit not enough, please charge again.")
-    return false
-  }
-  
+function defaultButtonPlay() {
   if (btnPlay.classList.contains("enabled")) {
     btnPlay.classList.remove("enabled")
     btnPlay.classList.add("disabled")
@@ -197,6 +212,16 @@ btnPlay.onclick = () => {
     _taruhan.disabled = false
     return play(false)
   }
+}
+
+
+btnPlay.onclick = () => {
+  if (lastCredit.value < 1 || lastCredit.value < -1) {
+    alert("Credit not enough, please charge again.")
+    return false
+  }
+  
+  return defaultButtonPlay()
 }
 btnStop.onclick = () => play(false)
 
